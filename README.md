@@ -9,6 +9,7 @@ Como resultado, el script debía producir el archivo [BUL_EM_TM_2024000007_002.j
 ## Indice
 
 - [Introducción y Objetivo](#introducción-y-objetivo)
+- [Ejecución del script](#ejecución-del-script)
 - [Estructura del proyecto](#estructura-del-proyecto)
 - [Análisis del Problema y Desafíos Resueltos](#análisis-del-problema-y-desafíos-resueltos)
 - [Desafíos](#desafíos)
@@ -19,21 +20,50 @@ Como resultado, el script debía producir el archivo [BUL_EM_TM_2024000007_002.j
 - [Estructura y Limpieza del Código](#estructura-y-limpieza-del-código)
 - [Pseudo-código del Proceso Lógico](#pseudo-código-del-proceso-lógico)
 
+## Ejecución del script
+
+Requisitos: Python 3.10+
+
+El siguiente proceso es para clonar el repositorio y ejecutar el script sin necesidad de instalar alguna librería o framework. Se puede realizar con WSL y Ubuntu
+
+```bash
+# Clonar el repositorio
+git clone https://github.com/jab9814/pdf-data-extraction.git
+cd pdf-data-extraction
+
+# Ejecutar
+python pipeline.py
+```
+
+El script está programado para realizar la extracción de la información para el documento [BUL_EM_TM_2024000007_001.json](/raw_data/BUL_EM_TM_2024000007_001.json) como `objetivo principal de la prueba`, pero es funcional para la extracción del documento [BUL_EM_TM_2024000001_001.json](/raw_data/BUL_EM_TM_2024000001_001.json).
+
+Para realizar dicha extracción, es necesario modificar el modulo [constants](/constants.py):
+
+``` python
+# Descomentar para ejecutar la extraccion del archivo BUL_EM_TM_2024000001_001 
+INPUT_FILE = "raw_data/BUL_EM_TM_2024000001_001.json"
+OUTPUT_FILE = "process_data/BUL_EM_TM_2024000001_002.json"
+
+# Comentar para no ejecutar la extraccion del archivo BUL_EM_TM_2024000007_001 
+# INPUT_FILE = "raw_data/BUL_EM_TM_2024000007_001.json"
+# OUTPUT_FILE = "process_data/BUL_EM_TM_2024000007_002.json"
+```
+
 ## Estructura del proyecto
 
 ``` bash
 pdf-data-extraction
-├── constants.py
-├── enums.py
-├── pipeline.py
-├── utils.py
-├── README.md
-├── raw_data
+├── constants.py    # Configuraciones para la ejecución de los archivos json con terminación 001.json
+├── enums.py        
+├── pipeline.py     # Lógica principal del proceso
+├── utils.py        # Funciones de utilidad
+├── README.md       # Memoria descriptiva de la prueba
+├── raw_data        # Archivos de entrada
 │   ├── BUL_EM_TM_2024000001_000.pdf
 │   ├── BUL_EM_TM_2024000001_001.json
 │   ├── BUL_EM_TM_2024000007_000.pdf
 │   └── BUL_EM_TM_2024000007_001.json
-└── process_data
+└── process_data    # Archivos generados
       ├── BUL_EM_TM_2024000001_002.pdf
       └── BUL_EM_TM_2024000007_002.json
 ```
